@@ -7,13 +7,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/home', function () {
-    return view("home");
-});
-
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::view('home', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
@@ -23,4 +23,12 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
-require __DIR__.'/auth.php';
+Route::get('/test', function () {
+    return view("test");
+});
+
+Route::get('/shop', function () {
+    return view('shop');
+});
+
+require __DIR__ . '/auth.php';
